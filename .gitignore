@@ -2,5 +2,5 @@
 .Rhistory
 .RData
 .Ruserdata
-/output
-/IMDB-Dataset
+/analysis/data
+/analysis/figures
