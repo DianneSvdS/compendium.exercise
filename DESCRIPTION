@@ -10,3 +10,14 @@ Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Imports:
+    data.table (>= 1.14.8),
+    devtools (>= 2.4.5),
+    ggplot2 (>= 3.4.3),
+    here (>= 1.0.1),
+    knitr (>= 1.43),
+    recommenderlab (>= 1.0.6),
+    reshape2 (>= 1.4.4),
+    rmarkdown (>= 2.22)
+Suggests: devtools,
+    git2r
