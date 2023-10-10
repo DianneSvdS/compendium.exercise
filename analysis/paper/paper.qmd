@@ -1,32 +1,18 @@
 ---
-title: "Title Goes Here"
+title: "Movie recommendations"
 author:
-  - Jane Doe:
+  - Rpita623:
       correspondence: "yes"
       email: janedoe@fosg.org
       orcid: 0000-0003-1689-0557
       institute:
-        - fosg
-        - fop
-  - John Q. Doe:
-      institute: fosg
-      orcid: 0000-0003-1689-0558
-  - Peder Ås:
-      institute: fosg
-      orcid: 0000-0003-1689-0559
-  - Juan Pérez:
-      orcid: 0000-0003-1689-0551
-      institute:
-        - name: Acme Corporation
-  - Max Mustermann:
-      orcid: 0000-0003-1689-0552
+        - github
 institute:
   - fosg:
       name: Formatting Open Science Group
       address: 23 Science Street, Eureka, Mississippi, USA
   - fop: Federation of Planets
-title-block-published: "Last updated"  
-date: now
+date: 10-10-2023
 date-format: long
 format: 
   docx:
@@ -44,75 +30,43 @@ filters:
   - ../templates/pagebreak.lua
 bibliography: references.bib
 csl: "../templates/journal-of-archaeological-science.csl" # Insert path for the bib-style
-abstract: |
-  Text of abstract
 keywords: |
-  keyword 1; keyword 2; keyword 3
-highlights: |
-  These are the highlights. 
+  Movies; ratings
 ---
 
-<!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
+<!-- load environmental variables and libraries from external R scripts -->
 
-<!-- With the following code you can access and display values from the yml header above. -->
+```{r, include=FALSE}
+install.packages(("here"), repos = "http://cran.us.r-project.org")
+library(here)
+sys.source(here("01-collect-data-Movie_Recommendation_System.R"), envir = knitr::knit_global())
+sys.source(here("02-process-data-Movie_Recommendation_System.R"), envir = knitr::knit_global())
+sys.source(here("03-visualize-data-Movie_Recommendation_System.R"), envir = knitr::knit_global())
+```
 
 Keywords: `r rmarkdown::metadata$keywords`
-
-Highlights: `r rmarkdown::metadata$highlights`
 
 <!-- The actual document text starts here: -->
 
 # Introduction
 
-Here is a citation [@Marwick2017]
-
-# Background
-
-# Methods
+summary of movies
 
 # Results
 
-<!-- Here's some example analysis code: -->
+```{r, echo=FALSE}
 
-```{r}
-#| label: get-data
-#| eval: false
-# Note the path that we need to use to access our data files when rendering this document
-my_data <- read.csv(here::here('analysis/data/raw_data/my_csv_file.csv'))
+#| label: qplot
+#| cache: false
+
+qplot(average_ratings, fill=I("steelblue"), col=I("red"), binwidth=0.1) +
+
+ggtitle("Distribution of the average rating per user")
 ```
-
-```{r}
-#| label: fig-demo-plot
-#| fig-cap: "A plot of random numbers"
-plot(rnorm(10))
-```
-
-@fig-demo-plot shows how we can have a caption and cross-reference for a plot. Note that figure label and cross-references must both be prefixed with `fig-`
-
-```{r}
-#| label: demo-inline-code
-#| echo: false
-x <- round(pi, 2)
-```
-
-Here is an example of inline code `r x` in the middle of a sentence.
 
 # Discussion
 
 # Conclusion
-
-# Acknowledgements
-
-<!-- The following line inserts a page break  -->
-
-\newpage
-
-# References
-
-<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
-
-::: {#refs}
-:::
 
 \newpage
 

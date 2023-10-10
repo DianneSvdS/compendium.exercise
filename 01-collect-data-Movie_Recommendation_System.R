@@ -1,7 +1,7 @@
 # Build a recommendation engine that recommends movies to users.
 # Item Based Collaborative Filter recommendation system
 #install packages if needed:
-install.packages(c("here", "recommenderlab", "ggplot2", "data.table", "reshape2"))
+install.packages(c("here", "recommenderlab", "ggplot2", "data.table", "reshape2"), repos = "http://cran.us.r-project.org")
 
 library(recommenderlab)
 library(ggplot2)
