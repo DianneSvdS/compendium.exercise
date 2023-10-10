@@ -18,7 +18,7 @@ as.matrix(similarity_mat)
 image(as.matrix(similarity_mat), main = "User's Similarities")
 
 #write image to file
-pdf(here("output", "User_similarities.pdf"))
+pdf(here("analysis", "figures", "User_similarities.pdf"))
 image(as.matrix(similarity_mat))
 dev.off()
 
@@ -30,7 +30,7 @@ as.matrix(movie_similarity)
 image(as.matrix(movie_similarity), main = "Movies similarity")
 
 #write image to file
-pdf(here("output", "Movies similarities.pdf"))
+pdf(here("analysis", "figures", "Movies similarities.pdf"))
 image(as.matrix(movie_similarity), main = "Movies similarity")
 dev.off()
 
@@ -57,8 +57,8 @@ ggplot(table_views[1:6, ], aes(x = title, y = views)) +
   geom_bar(stat="identity", fill = 'steelblue') +
   geom_text(aes(label=views), vjust=-0.3, size=3.5) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  ggtitle("Total Views of the Top Films") 
-  ggsave(here("output", "Movies similarities.jpg"))
+  ggtitle("Total Views of the Top Films")
+  ggsave(here("analysis", "figures", "Movies similarities.jpg"))
 
 # Heatmap of Movie Ratings
 # Visualize a heatmap of the movie ratings
@@ -77,7 +77,7 @@ image(movie_ratings[rowCounts(movie_ratings) > minimum_movies,
       main = "Heatmap of the top users and movies")
 
 #write heatmap to file
-pdf(here("output", "Heatmap_top_users_and_movies.pdf"))
+pdf(here("analysis", "figures", "Heatmap_top_users_and_movies.pdf"))
 image(movie_ratings[rowCounts(movie_ratings) > minimum_movies,
                     colCounts(movie_ratings) > minimum_users],
       main = "Heatmap of the top users and movies")
@@ -138,14 +138,14 @@ sum_cols <- colSums(model_info$sim > 0)
 qplot(sum_cols, fill=I("steelblue"), col=I("red"))+ ggtitle("Distribution of the column count")
 
 # the number of items to recommend to each user
-top_recommendations <- 10 
+top_recommendations <- 10
 predicted_recommendations <- predict(object = recommen_model,
                                      newdata = testing_data,
                                      n = top_recommendations)
 predicted_recommendations
 
 # recommendation for the first user
-user1 <- predicted_recommendations@items[[1]] 
+user1 <- predicted_recommendations@items[[1]]
 movies_user1 <- predicted_recommendations@itemLabels[user1]
 movies_user2 <- movies_user1
 for (index in 1:10){
@@ -156,7 +156,7 @@ movies_user2
 
 # matrix with the recommendations for each user
 recommendation_matrix <- sapply(predicted_recommendations@items,
-                                function(x){ as.integer(colnames(movie_ratings)[x]) }) 
+                                function(x){ as.integer(colnames(movie_ratings)[x]) })
 
 #dim(recc_matrix)
 recommendation_matrix[,1:4]
@@ -167,7 +167,7 @@ chart_title <- "Distribution of the Number of Items for IBCF"
 qplot(number_of_items, fill=I("steelblue"), col=I("red")) + ggtitle(chart_title)
 
 #save qplot
-pdf(here("output", "Distribution_items_IBCF.pdf"))
+pdf(here("analysis", "figures", "Distribution_items_IBCF.pdf"))
 qplot(number_of_items, fill=I("steelblue"), col=I("red")) + ggtitle(chart_title)
 dev.off()
 
