@@ -30,7 +30,7 @@ as.matrix(movie_similarity)
 image(as.matrix(movie_similarity), main = "Movies similarity")
 
 #write image to file
-pdf(here("analysis", "figures", "Movies similarities.pdf"))
+pdf(here("analysis", "figures", "Movies-similarities.pdf"))
 image(as.matrix(movie_similarity), main = "Movies similarity")
 dev.off()
 
@@ -57,8 +57,9 @@ ggplot(table_views[1:6, ], aes(x = title, y = views)) +
   geom_bar(stat="identity", fill = 'steelblue') +
   geom_text(aes(label=views), vjust=-0.3, size=3.5) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  expand_limits(y=c(0, 500)) +
   ggtitle("Total Views of the Top Films")
-  ggsave(here("analysis", "figures", "Movies similarities.jpg"))
+  ggsave(here("analysis", "figures", "views-top-films.jpg"))
 
 # Heatmap of Movie Ratings
 # Visualize a heatmap of the movie ratings
